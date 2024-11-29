@@ -1,0 +1,8 @@
+(define int owl1 1)
+
+(define int owl2 2)
+
+(define [\(l int) -> (r int)] add (+ l r))
+(define int newOwl (add owl1 owl2))
+
+(display newOwl)
