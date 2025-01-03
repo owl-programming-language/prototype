@@ -117,6 +117,22 @@ pub fn init<'a>() -> Env<'a> {
     ),
   );
   env.insert("pi".to_string(), ("float".to_string(), Exp::Atom(Atom::Number(Number::Int(3)))));
+  env.insert("display".to_string(), ("any".to_string(), Exp::Atom(Atom::Function(|a, _| {
+    match a {
+      Exp::Atom(Atom::Number(Number::Int(i))) => {
+        println!("{}", i);
+        Exp::Atom(Atom::Number(Number::Int(i)))
+      },
+      Exp::Atom(Atom::Number(Number::Float(f))) => {
+        println!("{}", f);
+        Exp::Atom(Atom::Number(Number::Float(f)))
+      },
+      _ => {
+        println!("{:?}", a);
+        a
+      },
+    }
+  }))));
   env
 }
 
@@ -229,7 +245,7 @@ pub fn eval(exp: &Exp, env: &mut Env) -> Exp {
             _ => eval_application(&Exp::List(ll), env),
           }
         },
-        _ => panic!("Invalid expression"),
+        _ => panic!("Invalid expression1"),
       }
     },
   }
