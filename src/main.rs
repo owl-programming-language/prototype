@@ -10,5 +10,6 @@ fn main() {
     };
 
     let content = std::fs::read_to_string(filename).unwrap();
-    dbg!(p::tokenize(&content));
+    // dbg!(p::tokenize(&content));
+    dbg!(p::parse(&content));
 }
