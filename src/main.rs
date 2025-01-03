@@ -1,4 +1,4 @@
-use std::env;
+use std::{env, result};
 // pub mod owl;
 pub mod p;
 
@@ -11,5 +11,8 @@ fn main() {
 
     let content = std::fs::read_to_string(filename).unwrap();
     // dbg!(p::tokenize(&content));
-    dbg!(p::parse(&content));
+    let exp = p::parse(&content);
+    dbg!(exp.clone());
+    let result = p::eval(&exp, &mut p::init());
+    dbg!(result);
 }
